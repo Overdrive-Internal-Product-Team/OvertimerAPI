@@ -31,7 +31,7 @@ namespace ClockifyCloneAPI.Controllers
         {
             try
             {
-                var companies = await _companyService.GetAllCompanies();
+                var companies = await _companyService.GetAll();
                 return Ok(companies);
             } catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace ClockifyCloneAPI.Controllers
         {
             try
             {
-                var company = await _companyService.GetCompany(id);
+                var company = await _companyService.Get(id);
                 return Ok(company);
             }
             catch (NotFoundException ex)
@@ -61,11 +61,11 @@ namespace ClockifyCloneAPI.Controllers
         // PUT: api/Company/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PutCompany(int id, PutCompanyRequest request)
+        public async Task<IActionResult> UpdateCompany(int id, UpdateCompanyRequest request)
         {
             try
             {
-                var message = await _companyService.UpdateCompany(id, request);
+                var message = await _companyService.Update(id, request);
                 return Ok(message);
             } catch (NotFoundException ex)
             {

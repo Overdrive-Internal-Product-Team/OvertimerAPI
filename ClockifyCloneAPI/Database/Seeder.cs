@@ -53,7 +53,7 @@ namespace ClockifyCloneAPI.Database
                     Password = BCrypt.Net.BCrypt.HashPassword("password"),
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
-                    active = true,
+                    Active = true,
                     RoleId = 1,
                     CompanyId = 1,                    
                 },
@@ -65,7 +65,7 @@ namespace ClockifyCloneAPI.Database
                     Password = BCrypt.Net.BCrypt.HashPassword("password"),
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
-                    active = true,
+                    Active = true,
                     RoleId = 2,
                     CompanyId = 1,
                 }

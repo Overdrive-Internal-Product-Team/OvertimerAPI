@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ClockifyCloneAPI.Migrations
 {
     [DbContext(typeof(ClockifyCloneDbContext))]
-    [Migration("20240104130901_FirstMigrations")]
+    [Migration("20240104174712_FirstMigrations")]
     partial class FirstMigrations
     {
         /// <inheritdoc />
@@ -84,9 +84,9 @@ namespace ClockifyCloneAPI.Migrations
                         {
                             Id = 1,
                             CNPJ = "33143114000140",
-                            CreatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 832, DateTimeKind.Utc).AddTicks(6458),
+                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8562),
                             Name = "Overdrive Software e Consultoria",
-                            UpdatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 832, DateTimeKind.Utc).AddTicks(6458)
+                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8564)
                         });
                 });
 
@@ -144,16 +144,16 @@ namespace ClockifyCloneAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 832, DateTimeKind.Utc).AddTicks(6581),
+                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8702),
                             Name = "Admin",
-                            UpdatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 832, DateTimeKind.Utc).AddTicks(6582)
+                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8703)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 832, DateTimeKind.Utc).AddTicks(6583),
+                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8704),
                             Name = "User",
-                            UpdatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 832, DateTimeKind.Utc).AddTicks(6583)
+                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8704)
                         });
                 });
 
@@ -193,6 +193,9 @@ namespace ClockifyCloneAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("CompanyId")
                         .HasColumnType("integer");
 
@@ -217,9 +220,6 @@ namespace ClockifyCloneAPI.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("active")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
@@ -232,26 +232,26 @@ namespace ClockifyCloneAPI.Migrations
                         new
                         {
                             Id = 1,
+                            Active = true,
                             CompanyId = 1,
-                            CreatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 941, DateTimeKind.Utc).AddTicks(3079),
+                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 62, DateTimeKind.Utc).AddTicks(4010),
                             Email = "admin@admin.com",
                             Name = "Admin",
-                            Password = "$2a$10$zcZd0En44YcUoWbfWxRCfeZItZxUpnaCT6H/PqPQpzAJxWb1ng1Bq",
+                            Password = "$2a$10$75aqXX2obt0wLUx0Y3sD/.nFowNuf7XzdKulVa06wVQHsi4k/.wY.",
                             RoleId = 1,
-                            UpdatedAt = new DateTime(2024, 1, 4, 13, 9, 0, 941, DateTimeKind.Utc).AddTicks(3084),
-                            active = true
+                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 62, DateTimeKind.Utc).AddTicks(4015)
                         },
                         new
                         {
                             Id = 2,
+                            Active = true,
                             CompanyId = 1,
-                            CreatedAt = new DateTime(2024, 1, 4, 13, 9, 1, 57, DateTimeKind.Utc).AddTicks(149),
+                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 186, DateTimeKind.Utc).AddTicks(1353),
                             Email = "user@user.com",
                             Name = "User",
-                            Password = "$2a$10$VKXRzC1Ng6n8PWWXQ9SqE.YTgLdZphau5j4d50w0hpVWcw9q35Fuu",
+                            Password = "$2a$10$SWaha0mrJbftHXLlnh2KK.kAgTU5blAWP/S1ZtvusfM.1aa7RdtVC",
                             RoleId = 2,
-                            UpdatedAt = new DateTime(2024, 1, 4, 13, 9, 1, 57, DateTimeKind.Utc).AddTicks(154),
-                            active = true
+                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 186, DateTimeKind.Utc).AddTicks(1360)
                         });
                 });
 

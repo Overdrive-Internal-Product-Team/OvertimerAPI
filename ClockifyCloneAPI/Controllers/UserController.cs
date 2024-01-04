@@ -1,5 +1,6 @@
 ﻿using ClockifyCloneAPI.Database;
 using ClockifyCloneAPI.Entities;
+using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.User;
 using ClockifyCloneAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,9 @@ namespace ClockifyCloneAPI.Controllers
     public class UserController : ControllerBase
     {
         private IUserService _userService;
-        private readonly ClockifyCloneDbContext _context;
 
         public UserController(ClockifyCloneDbContext context, IUserService userService)
         {
-            _context = context;
             _userService = userService;
         }
 
@@ -24,63 +23,10 @@ namespace ClockifyCloneAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserEntity>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
-        }
-
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserEntity>> GetUserEntity(int id)
-        {
-            var userEntity = await _context.Users.FindAsync(id);
-
-            if (userEntity == null)
-            {
-                return NotFound();
-            }
-
-            return userEntity;
-        }
-
-        // PUT: api/User/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserEntity(int id, UserEntity userEntity)
-        {
-            if (id != userEntity.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(userEntity).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserEntityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/User
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult> PostUser(PostUserRequest user)
-        {
-            try
-            {
-                var message = await _userService.Create(user);
-                return Ok(message);
+                var companies = await _userService.GetAll();
+                return Ok(companies);
             }
             catch (Exception ex)
             {
@@ -88,25 +34,59 @@ namespace ClockifyCloneAPI.Controllers
             }
         }
 
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserEntity(int id)
+        // GET: api/User/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserEntity>> GetUserEntity(int id)
         {
-            var userEntity = await _context.Users.FindAsync(id);
-            if (userEntity == null)
+            try
             {
-                return NotFound();
+                var company = await _userService.Get(id);
+                return Ok(company);
             }
-
-            _context.Users.Remove(userEntity);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        private bool UserEntityExists(int id)
+        // PUT: api/User/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UpdateUserRequest request)
         {
-            return _context.Users.Any(e => e.Id == id);
+            try
+            {
+                var message = await _userService.Update(id, request);
+                return Ok(message);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        // POST: api/User
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult> PostUser(PostUserRequest request)
+        {
+            try
+            {
+                var message = await _userService.Create(request);
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }        
     }
 }

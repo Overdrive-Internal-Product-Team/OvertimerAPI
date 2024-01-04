@@ -16,7 +16,7 @@ public class CompanyService : ICompanyService
         _mapper = mapper;
     }
 
-    public async Task<List<GetCompanyResponse>> GetAllCompanies()
+    public async Task<List<GetCompanyResponse>> GetAll()
     {
         var companies = await _context.Companies.
             ProjectTo<GetCompanyResponse>(_mapper.ConfigurationProvider)
@@ -25,7 +25,7 @@ public class CompanyService : ICompanyService
         return companies;
     }
 
-    public async Task<GetCompanyResponse> GetCompany(int companyId)
+    public async Task<GetCompanyResponse> Get(int companyId)
     {
         var company = await _context.Companies
             .ProjectTo<GetCompanyResponse>(_mapper.ConfigurationProvider)
@@ -35,7 +35,7 @@ public class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<string> UpdateCompany(int companyId, PutCompanyRequest request)
+    public async Task<string> Update(int companyId, UpdateCompanyRequest request)
     {
         var company = await _context.Companies
             .FirstOrDefaultAsync(c => c.Id == companyId)
@@ -51,7 +51,7 @@ public class CompanyService : ICompanyService
 
 public interface ICompanyService
 {
-    public Task<string> UpdateCompany(int companyId, PutCompanyRequest request);
-    public Task<GetCompanyResponse> GetCompany(int companyId);
-    public Task<List<GetCompanyResponse>> GetAllCompanies();
+    public Task<string> Update(int companyId, UpdateCompanyRequest request);
+    public Task<GetCompanyResponse> Get(int companyId);
+    public Task<List<GetCompanyResponse>> GetAll();
 }

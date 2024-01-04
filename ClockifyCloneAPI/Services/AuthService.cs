@@ -3,7 +3,7 @@ using AutoMapper.QueryableExtensions;
 using ClockifyCloneAPI.Database;
 using ClockifyCloneAPI.Entities;
 using ClockifyCloneAPI.Exceptions;
-using ClockifyCloneAPI.Models.Auth;
+using ClockifyCloneAPI.Models.User;
 using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -21,7 +21,7 @@ public class AuthService : IAuthService
         _mapper = mapper;
     }
 
-    public async Task<GetUserDataResponse> GetAuthUserInfos(ClaimsPrincipal user)
+    public async Task<GetUserResponse> GetAuthUserInfos(ClaimsPrincipal user)
     {
         if (user?.Identity?.IsAuthenticated is false || user is null)
             throw new UnauthorizedAccessException();
@@ -31,7 +31,7 @@ public class AuthService : IAuthService
         var userData = await _context.Users.Where(u => u.Email == userEmail)
             .Include(u => u.Role)
             .Include(u => u.Company)
-            .ProjectTo<GetUserDataResponse>(_mapper.ConfigurationProvider)
+            .ProjectTo<GetUserResponse>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync() ?? throw new NotFoundException("Usuário inválido ou não encontrado!");
 
         return userData;
@@ -74,6 +74,6 @@ public class AuthService : IAuthService
 public interface IAuthService
 {
     public ClaimsPrincipal GetEmailClaimsPrincipal(string email, string password);
-    public Task<GetUserDataResponse> GetAuthUserInfos(ClaimsPrincipal user);
+    public Task<GetUserResponse> GetAuthUserInfos(ClaimsPrincipal user);
 }
 
