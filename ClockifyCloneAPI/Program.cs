@@ -67,6 +67,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+builder.Services.AddScoped(typeof(ICompanyService), typeof(CompanyService));
 
 var app = builder.Build();
 

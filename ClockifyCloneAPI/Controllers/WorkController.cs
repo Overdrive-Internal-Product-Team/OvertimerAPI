@@ -25,7 +25,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/Work/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WorkEntity>> GetWorkEntity(int id)
+        public async Task<ActionResult<WorkEntity>> GetWork(int id)
         {
             var workEntity = await _context.Works.FindAsync(id);
 
@@ -40,7 +40,7 @@ namespace ClockifyCloneAPI.Controllers
         // PUT: api/Work/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWorkEntity(int id, WorkEntity workEntity)
+        public async Task<IActionResult> PutWork(int id, WorkEntity workEntity)
         {
             if (id != workEntity.Id)
             {
@@ -55,7 +55,7 @@ namespace ClockifyCloneAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WorkEntityExists(id))
+                if (!WorkExists(id))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace ClockifyCloneAPI.Controllers
         // POST: api/Work
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<WorkEntity>> PostWorkEntity(WorkEntity workEntity)
+        public async Task<ActionResult<WorkEntity>> PostWork(WorkEntity workEntity)
         {
             _context.Works.Add(workEntity);
             await _context.SaveChangesAsync();
@@ -81,7 +81,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // DELETE: api/Work/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWorkEntity(int id)
+        public async Task<IActionResult> DeleteWork(int id)
         {
             var workEntity = await _context.Works.FindAsync(id);
             if (workEntity == null)
@@ -95,7 +95,7 @@ namespace ClockifyCloneAPI.Controllers
             return NoContent();
         }
 
-        private bool WorkEntityExists(int id)
+        private bool WorkExists(int id)
         {
             return _context.Works.Any(e => e.Id == id);
         }
