@@ -1,7 +1,7 @@
 ﻿namespace ClockifyCloneAPI.Entities;
-public class ProjectEntity : BaseEntity
+public class Project : BaseEntity
 {
     public string Name { get; set; }
     public int CategoryId { get; set; }
-    public CategoryEntity Category { get; set; }
+    public Category Category { get; set; }
 }

@@ -1,6 +1,5 @@
 ﻿namespace ClockifyCloneAPI.Entities;
-public class CompanyEntity : BaseEntity
+public class Role : BaseEntity
 {
     public string Name { get; set; }
-    public string CNPJ { get; set; }
 }

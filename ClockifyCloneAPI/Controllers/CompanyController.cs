@@ -27,7 +27,7 @@ namespace ClockifyCloneAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CompanyEntity>>> GetCompanies()
+        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/Company/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CompanyEntity>> GetCompany(int id)
+        public async Task<ActionResult<Company>> GetCompany(int id)
         {
             try
             {

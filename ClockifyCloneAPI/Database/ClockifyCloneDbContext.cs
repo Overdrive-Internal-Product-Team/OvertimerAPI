@@ -1,29 +1,28 @@
 ﻿using ClockifyCloneAPI.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace ClockifyCloneAPI.Database;
 public class ClockifyCloneDbContext : DbContext
 {
     public ClockifyCloneDbContext(DbContextOptions<ClockifyCloneDbContext> options) : base(options) { }
 
-    public DbSet<CompanyEntity> Companies { get; set; }
-    public DbSet<RoleEntity> Roles { get; set; }
-    public DbSet<UserEntity> Users { get; set; }
-    public DbSet<TagEntity> Tags { get; set; }
-    public DbSet<CategoryEntity> Categories { get; set; }
-    public DbSet<ProjectEntity> Projects { get; set; }
-    public DbSet<WorkEntity> Works { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<Work> Works { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {       
-        modelBuilder.Entity<WorkEntity>()
+        modelBuilder.Entity<Work>()
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Works)
                 .UsingEntity(
                 "WorkHasTags",
-                l => l.HasOne(typeof(TagEntity)).WithMany().HasForeignKey("TagId").HasPrincipalKey(nameof(TagEntity.Id)),
-                r => r.HasOne(typeof(WorkEntity)).WithMany().HasForeignKey("WorkId").HasPrincipalKey(nameof(WorkEntity.Id)),
+                l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagId").HasPrincipalKey(nameof(Tag.Id)),
+                r => r.HasOne(typeof(Work)).WithMany().HasForeignKey("WorkId").HasPrincipalKey(nameof(Work.Id)),
                 k => k.HasKey("TagId", "WorkId"));
 
         Seeder.SeedData(modelBuilder);
@@ -31,5 +30,33 @@ public class ClockifyCloneDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
-    
+    public override int SaveChanges()
+    {
+        UpdateTimestamps();
+        return base.SaveChanges();
+    }
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        UpdateTimestamps();
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void UpdateTimestamps()
+    {
+        var entities = ChangeTracker.Entries()
+            .Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+        foreach (var entityEntry in entities)
+        {
+            if (entityEntry.State == EntityState.Added)
+            {
+                ((BaseEntity)entityEntry.Entity).CreatedAt = DateTime.UtcNow;
+            }
+
+            ((BaseEntity)entityEntry.Entity).UpdatedAt = DateTime.UtcNow;
+        }
+    }
+
+
 }

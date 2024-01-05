@@ -19,7 +19,7 @@ public class UserService : IUserService
 
     public async Task<string> Create(PostUserRequest userModel)
     {
-        var user = _mapper.Map<UserEntity>(userModel);
+        var user = _mapper.Map<User>(userModel);
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         user.Active = true;
 
@@ -32,6 +32,7 @@ public class UserService : IUserService
     public async Task<GetUserResponse> Get(int id)
     {
         var user = await _context.Users
+            .AsNoTracking()
             .Include(x => x.Role)
             .Include(x => x.Company)
             .ProjectTo<GetUserResponse>(_mapper.ConfigurationProvider)
@@ -43,6 +44,7 @@ public class UserService : IUserService
     public async Task<List<GetUserResponse>> GetAll()
     {
         var users = await _context.Users
+            .AsNoTracking()
             .Include(x => x.Role)
             .ProjectTo<GetUserResponse>(_mapper.ConfigurationProvider)
             .ToListAsync();

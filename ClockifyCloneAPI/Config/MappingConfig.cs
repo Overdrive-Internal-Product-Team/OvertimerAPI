@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClockifyCloneAPI.Entities;
+using ClockifyCloneAPI.Models.Category;
 using ClockifyCloneAPI.Models.Company;
 using ClockifyCloneAPI.Models.User;
 
@@ -12,21 +13,31 @@ namespace PersonalizeFIT.ExerciseAPI.Config
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<PostUserRequest, UserEntity>().ReverseMap();
-                config.CreateMap<GetUserResponse, UserEntity>().ReverseMap();
-                config.CreateMap<UpdateUserRequest, UserEntity>()
+                config.CreateMap<PostUserRequest, User>().ReverseMap();
+                config.CreateMap<GetUserResponse, User>().ReverseMap();
+                config.CreateMap<UpdateUserRequest, User>()
                     .ForAllMembers(opt =>
                         opt.Condition((src, dest, srcMember, destMember) =>
                             VerifyNullMemberAndNullForeignKeyCondition(srcMember)
                         ));
 
-                config.CreateMap<GetCompanyResponse, CompanyEntity>().ReverseMap();
-                config.CreateMap<UpdateCompanyRequest, CompanyEntity>()
+                config.CreateMap<GetCompanyResponse, Company>().ReverseMap();
+                config.CreateMap<UpdateCompanyRequest, Company>()
                     .ForAllMembers(opt =>
                         opt.Condition((src, dest, srcMember, destMember) =>
                             VerifyNullMemberCondition(srcMember)
                         )
                     );
+
+                config.CreateMap<PostCategoryRequest, Category>().ReverseMap();
+                config.CreateMap<GetCategoryResponse, Category>().ReverseMap();
+                config.CreateMap<GetAllCategoryResponse, Category>().ReverseMap();
+                config.CreateMap<UpdateCategoryRequest, Category>()
+                    .ForAllMembers(opt =>
+                        opt.Condition((src, dest, srcMember, destMember) =>
+                            VerifyNullMemberAndNullForeignKeyCondition(srcMember)
+                        ));
+
             });
             return mappingConfig;
         }
@@ -40,10 +51,6 @@ namespace PersonalizeFIT.ExerciseAPI.Config
         {
             return srcMember != null && !srcMember.Equals(default(int));
         }
-
-
-
-
 
     }
 }

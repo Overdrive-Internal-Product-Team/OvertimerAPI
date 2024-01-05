@@ -21,7 +21,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserEntity>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserEntity>> GetUserEntity(int id)
+        public async Task<ActionResult<User>> GetUserEntity(int id)
         {
             try
             {

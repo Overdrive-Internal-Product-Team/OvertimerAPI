@@ -14,8 +14,8 @@ namespace ClockifyCloneAPI.Database
 
         private static void SeedCompany(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CompanyEntity>().HasData(
-                new CompanyEntity() { 
+            modelBuilder.Entity<Company>().HasData(
+                new Company() { 
                     Id = 1, 
                     Name = "Overdrive Software e Consultoria", 
                     CNPJ = "33143114000140", 
@@ -26,14 +26,14 @@ namespace ClockifyCloneAPI.Database
         }
         private static void SeedRoles(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<RoleEntity>().HasData(
-                new RoleEntity() { 
+            modelBuilder.Entity<Role>().HasData(
+                new Role() { 
                     Id = 1, 
                     Name = "Admin",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                 },
-                new RoleEntity() { 
+                new Role() { 
                     Id = 2, 
                     Name = "User",
                     CreatedAt = DateTime.UtcNow,
@@ -44,8 +44,8 @@ namespace ClockifyCloneAPI.Database
 
         private static void SeedUsers(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserEntity>().HasData(
-                new UserEntity()
+            modelBuilder.Entity<User>().HasData(
+                new User()
                 {
                     Id = 1,
                     Name = "Admin",
@@ -57,7 +57,7 @@ namespace ClockifyCloneAPI.Database
                     RoleId = 1,
                     CompanyId = 1,                    
                 },
-                new UserEntity()
+                new User()
                 {
                     Id = 2,
                     Name = "User",

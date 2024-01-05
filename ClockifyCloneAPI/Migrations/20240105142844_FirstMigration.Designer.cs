@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ClockifyCloneAPI.Migrations
 {
     [DbContext(typeof(ClockifyCloneDbContext))]
-    [Migration("20240104174712_FirstMigrations")]
-    partial class FirstMigrations
+    [Migration("20240105142844_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace ClockifyCloneAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.CategoryEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace ClockifyCloneAPI.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.CompanyEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,13 +84,13 @@ namespace ClockifyCloneAPI.Migrations
                         {
                             Id = 1,
                             CNPJ = "33143114000140",
-                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8562),
+                            CreatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5361),
                             Name = "Overdrive Software e Consultoria",
-                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8564)
+                            UpdatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5363)
                         });
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.ProjectEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,7 +118,7 @@ namespace ClockifyCloneAPI.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.RoleEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,20 +144,20 @@ namespace ClockifyCloneAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8702),
+                            CreatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5484),
                             Name = "Admin",
-                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8703)
+                            UpdatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5485)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8704),
+                            CreatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5486),
                             Name = "User",
-                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8704)
+                            UpdatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5486)
                         });
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.TagEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,7 +185,7 @@ namespace ClockifyCloneAPI.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.UserEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,28 +234,28 @@ namespace ClockifyCloneAPI.Migrations
                             Id = 1,
                             Active = true,
                             CompanyId = 1,
-                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 62, DateTimeKind.Utc).AddTicks(4010),
+                            CreatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 613, DateTimeKind.Utc).AddTicks(2347),
                             Email = "admin@admin.com",
                             Name = "Admin",
-                            Password = "$2a$10$75aqXX2obt0wLUx0Y3sD/.nFowNuf7XzdKulVa06wVQHsi4k/.wY.",
+                            Password = "$2a$10$m2UdCjcByE/XjZmy8YJKxOHi/X1Uir9rHJvC6uwab5Sl5iVsB/LCi",
                             RoleId = 1,
-                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 62, DateTimeKind.Utc).AddTicks(4015)
+                            UpdatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 613, DateTimeKind.Utc).AddTicks(2355)
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
                             CompanyId = 1,
-                            CreatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 186, DateTimeKind.Utc).AddTicks(1353),
+                            CreatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 722, DateTimeKind.Utc).AddTicks(5703),
                             Email = "user@user.com",
                             Name = "User",
-                            Password = "$2a$10$SWaha0mrJbftHXLlnh2KK.kAgTU5blAWP/S1ZtvusfM.1aa7RdtVC",
+                            Password = "$2a$10$Qv9UJ6qJwvfu.8HNZFSaReWzbbK9VzptwCS2FBNXek32xncDjBbj.",
                             RoleId = 2,
-                            UpdatedAt = new DateTime(2024, 1, 4, 17, 47, 11, 186, DateTimeKind.Utc).AddTicks(1360)
+                            UpdatedAt = new DateTime(2024, 1, 5, 14, 28, 43, 722, DateTimeKind.Utc).AddTicks(5781)
                         });
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.WorkEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Work", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,9 +309,9 @@ namespace ClockifyCloneAPI.Migrations
                     b.ToTable("WorkHasTags");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.CategoryEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Category", b =>
                 {
-                    b.HasOne("ClockifyCloneAPI.Entities.CompanyEntity", "Company")
+                    b.HasOne("ClockifyCloneAPI.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -320,9 +320,9 @@ namespace ClockifyCloneAPI.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.ProjectEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Project", b =>
                 {
-                    b.HasOne("ClockifyCloneAPI.Entities.CategoryEntity", "Category")
+                    b.HasOne("ClockifyCloneAPI.Entities.Category", "Category")
                         .WithMany("Projects")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -331,9 +331,9 @@ namespace ClockifyCloneAPI.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.TagEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Tag", b =>
                 {
-                    b.HasOne("ClockifyCloneAPI.Entities.CompanyEntity", "Company")
+                    b.HasOne("ClockifyCloneAPI.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -342,15 +342,15 @@ namespace ClockifyCloneAPI.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.UserEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.User", b =>
                 {
-                    b.HasOne("ClockifyCloneAPI.Entities.CompanyEntity", "Company")
+                    b.HasOne("ClockifyCloneAPI.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClockifyCloneAPI.Entities.RoleEntity", "Role")
+                    b.HasOne("ClockifyCloneAPI.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -361,15 +361,15 @@ namespace ClockifyCloneAPI.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.WorkEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Work", b =>
                 {
-                    b.HasOne("ClockifyCloneAPI.Entities.ProjectEntity", "Project")
+                    b.HasOne("ClockifyCloneAPI.Entities.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClockifyCloneAPI.Entities.UserEntity", "User")
+                    b.HasOne("ClockifyCloneAPI.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,20 +382,20 @@ namespace ClockifyCloneAPI.Migrations
 
             modelBuilder.Entity("WorkHasTags", b =>
                 {
-                    b.HasOne("ClockifyCloneAPI.Entities.TagEntity", null)
+                    b.HasOne("ClockifyCloneAPI.Entities.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClockifyCloneAPI.Entities.WorkEntity", null)
+                    b.HasOne("ClockifyCloneAPI.Entities.Work", null)
                         .WithMany()
                         .HasForeignKey("WorkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ClockifyCloneAPI.Entities.CategoryEntity", b =>
+            modelBuilder.Entity("ClockifyCloneAPI.Entities.Category", b =>
                 {
                     b.Navigation("Projects");
                 });

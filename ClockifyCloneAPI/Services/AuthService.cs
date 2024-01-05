@@ -29,6 +29,7 @@ public class AuthService : IAuthService
         var userEmail = user.FindFirst(ClaimTypes.Email)?.Value;
 
         var userData = await _context.Users.Where(u => u.Email == userEmail)
+            .AsNoTracking()
             .Include(u => u.Role)
             .Include(u => u.Company)
             .ProjectTo<GetUserResponse>(_mapper.ConfigurationProvider)
@@ -58,7 +59,7 @@ public class AuthService : IAuthService
         throw new UnauthorizedAccessException();
     }
 
-    private UserEntity? GetValidUser(string email, string password)
+    private User? GetValidUser(string email, string password)
     {
         var user = _context.Users
             .Include(u => u.Role)

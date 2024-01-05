@@ -18,14 +18,14 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/Work
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WorkEntity>>> GetWorks()
+        public async Task<ActionResult<IEnumerable<Work>>> GetWorks()
         {
             return await _context.Works.ToListAsync();
         }
 
         // GET: api/Work/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WorkEntity>> GetWork(int id)
+        public async Task<ActionResult<Work>> GetWork(int id)
         {
             var workEntity = await _context.Works.FindAsync(id);
 
@@ -40,7 +40,7 @@ namespace ClockifyCloneAPI.Controllers
         // PUT: api/Work/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWork(int id, WorkEntity workEntity)
+        public async Task<IActionResult> PutWork(int id, Work workEntity)
         {
             if (id != workEntity.Id)
             {
@@ -71,7 +71,7 @@ namespace ClockifyCloneAPI.Controllers
         // POST: api/Work
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<WorkEntity>> PostWork(WorkEntity workEntity)
+        public async Task<ActionResult<Work>> PostWork(Work workEntity)
         {
             _context.Works.Add(workEntity);
             await _context.SaveChangesAsync();

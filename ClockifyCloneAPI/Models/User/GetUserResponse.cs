@@ -7,6 +7,6 @@ public class GetUserResponse
     public string Name { get; set; }
     public string Email { get; set; }
     public bool Active { get; set; }
-    public RoleEntity Role { get; set; }
-    public CompanyEntity Company { get; set; }
+    public Role Role { get; set; }
+    public Entities.Company Company { get; set; }
 }

@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ClockifyCloneAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigrations : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -201,15 +201,15 @@ namespace ClockifyCloneAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "CNPJ", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, "33143114000140", new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8562), "Overdrive Software e Consultoria", new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8564) });
+                values: new object[] { 1, "33143114000140", new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5361), "Overdrive Software e Consultoria", new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5363) });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8702), "Admin", new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8703) },
-                    { 2, new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8704), "User", new DateTime(2024, 1, 4, 17, 47, 10, 936, DateTimeKind.Utc).AddTicks(8704) }
+                    { 1, new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5484), "Admin", new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5485) },
+                    { 2, new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5486), "User", new DateTime(2024, 1, 5, 14, 28, 43, 499, DateTimeKind.Utc).AddTicks(5486) }
                 });
 
             migrationBuilder.InsertData(
@@ -217,8 +217,8 @@ namespace ClockifyCloneAPI.Migrations
                 columns: new[] { "Id", "Active", "CompanyId", "CreatedAt", "Email", "Name", "Password", "RoleId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, 1, new DateTime(2024, 1, 4, 17, 47, 11, 62, DateTimeKind.Utc).AddTicks(4010), "admin@admin.com", "Admin", "$2a$10$75aqXX2obt0wLUx0Y3sD/.nFowNuf7XzdKulVa06wVQHsi4k/.wY.", 1, new DateTime(2024, 1, 4, 17, 47, 11, 62, DateTimeKind.Utc).AddTicks(4015) },
-                    { 2, true, 1, new DateTime(2024, 1, 4, 17, 47, 11, 186, DateTimeKind.Utc).AddTicks(1353), "user@user.com", "User", "$2a$10$SWaha0mrJbftHXLlnh2KK.kAgTU5blAWP/S1ZtvusfM.1aa7RdtVC", 2, new DateTime(2024, 1, 4, 17, 47, 11, 186, DateTimeKind.Utc).AddTicks(1360) }
+                    { 1, true, 1, new DateTime(2024, 1, 5, 14, 28, 43, 613, DateTimeKind.Utc).AddTicks(2347), "admin@admin.com", "Admin", "$2a$10$m2UdCjcByE/XjZmy8YJKxOHi/X1Uir9rHJvC6uwab5Sl5iVsB/LCi", 1, new DateTime(2024, 1, 5, 14, 28, 43, 613, DateTimeKind.Utc).AddTicks(2355) },
+                    { 2, true, 1, new DateTime(2024, 1, 5, 14, 28, 43, 722, DateTimeKind.Utc).AddTicks(5703), "user@user.com", "User", "$2a$10$Qv9UJ6qJwvfu.8HNZFSaReWzbbK9VzptwCS2FBNXek32xncDjBbj.", 2, new DateTime(2024, 1, 5, 14, 28, 43, 722, DateTimeKind.Utc).AddTicks(5781) }
                 });
 
             migrationBuilder.CreateIndex(

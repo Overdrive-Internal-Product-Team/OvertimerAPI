@@ -18,8 +18,9 @@ public class CompanyService : ICompanyService
 
     public async Task<List<GetCompanyResponse>> GetAll()
     {
-        var companies = await _context.Companies.
-            ProjectTo<GetCompanyResponse>(_mapper.ConfigurationProvider)
+        var companies = await _context.Companies
+            .AsNoTracking()
+            .ProjectTo<GetCompanyResponse>(_mapper.ConfigurationProvider)
             .ToListAsync();
 
         return companies;
@@ -28,6 +29,7 @@ public class CompanyService : ICompanyService
     public async Task<GetCompanyResponse> Get(int companyId)
     {
         var company = await _context.Companies
+            .AsNoTracking()
             .ProjectTo<GetCompanyResponse>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(c => c.Id == companyId) 
             ?? throw new NotFoundException("Empresa não encontrada!");
