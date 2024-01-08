@@ -1,30 +1,27 @@
 ﻿using ClockifyCloneAPI.Exceptions;
-using ClockifyCloneAPI.Models.Work;
+using ClockifyCloneAPI.Models.Project;
 using ClockifyCloneAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ClockifyCloneAPI.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class WorkController : ControllerBase
+public class ProjectController : ControllerBase
 {
-    private readonly IWorkService _workService;
+    private readonly IProjectService _projectService;
 
-    public WorkController(IWorkService workService)
+    public ProjectController(IProjectService projectService)
     {
-        _workService = workService;
+        _projectService = projectService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetAllWorkResponse>>> GetWorks()
+    public async Task<ActionResult<IEnumerable<GetAllProjectResponse>>> GetProjects()
     {
         try
         {
-            var works = await _workService.GetAll();
-            return Ok(works);
+            var projects = await _projectService.GetAll();
+            return Ok(projects);
         }
         catch (Exception ex)
         {
@@ -33,11 +30,11 @@ public class WorkController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> PutWork(int id, UpdateWorkRequest request)
+    public async Task<IActionResult> PatchProject(int id, UpdateProjectRequest request)
     {
         try
         {
-            var message = await _workService.Update(id, request);
+            var message = await _projectService.Update(id, request);
             return Ok(message);
         }
         catch (NotFoundException ex)
@@ -51,11 +48,11 @@ public class WorkController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<string>> PostWork(PostWorkRequest request)
+    public async Task<ActionResult<string>> PostProject(PostProjectRequest request)
     {
         try
         {
-            var message = await _workService.Create(request);
+            var message = await _projectService.Create(request);
             return Ok(message);
         }
         catch (Exception ex)
@@ -65,11 +62,11 @@ public class WorkController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteWork(int id)
+    public async Task<IActionResult> DeleteProject(int id)
     {
         try
         {
-            var message = await _workService.Delete(id);
+            var message = await _projectService.Delete(id);
             return Ok(message);
         }
         catch (NotFoundException ex)
@@ -83,12 +80,12 @@ public class WorkController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetWork(int id)
+    public async Task<IActionResult> GetProject(int id)
     {
         try
         {
-            var work = await _workService.Get(id);
-            return Ok(work);
+            var message = await _projectService.Get(id);
+            return Ok(message);
         }
         catch (NotFoundException ex)
         {
@@ -100,3 +97,4 @@ public class WorkController : ControllerBase
         }
     }
 }
+

@@ -36,7 +36,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserEntity(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             try
             {

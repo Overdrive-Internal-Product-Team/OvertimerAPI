@@ -78,7 +78,8 @@ public interface ICategoryService
 {
     public Task<string> Update(int id, UpdateCategoryRequest request);
     public Task<string> Create(PostCategoryRequest request);
-    public Task<GetCategoryResponse> Get(int id);
     public Task<string> Delete(int id);
     public Task<List<GetAllCategoryResponse>> GetAll();
+    public Task<GetCategoryResponse> Get(int id);
+
 }

@@ -69,6 +69,9 @@ builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
 builder.Services.AddScoped(typeof(ICompanyService), typeof(CompanyService));
 builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+builder.Services.AddScoped(typeof(ITagService), typeof(TagService));
+builder.Services.AddScoped(typeof(IProjectService), typeof(ProjectService));
+builder.Services.AddScoped(typeof(IWorkService), typeof(WorkService));
 
 var app = builder.Build();
 

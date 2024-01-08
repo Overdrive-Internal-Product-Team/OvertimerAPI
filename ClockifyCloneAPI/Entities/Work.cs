@@ -8,5 +8,5 @@ public class Work : BaseEntity
     public User User { get; set; }
     public int ProjectId { get; set; }
     public Project Project { get; set; }
-    public List<Tag> Tags { get; set; }
+    public List<Tag> Tags { get; set; } = new List<Tag>();
 }
