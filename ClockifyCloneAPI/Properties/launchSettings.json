@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ClockifyClone": {
+    "OvertimerAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:4495;http://localhost:4496"
+      "applicationUrl": "https://localhost:4445;http://localhost:4446"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -27,16 +27,6 @@
       },
       "publishAllPorts": true,
       "useSSL": true
-    },
-    "WSL": {
-      "commandName": "WSL2",
-      "launchBrowser": true,
-      "launchUrl": "https://localhost:4495/swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:4495;http://localhost:4496"
-      },
-      "distributionName": ""
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
@@ -45,7 +35,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:41850",
-      "sslPort": 4495
+      "sslPort": 4445
     }
   }
 }
