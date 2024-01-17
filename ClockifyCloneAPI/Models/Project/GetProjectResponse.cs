@@ -1,6 +1,4 @@
-﻿using ClockifyCloneAPI.Entities;
-
-namespace ClockifyCloneAPI.Models.Project;
+﻿namespace ClockifyCloneAPI.Models.Project;
 public class GetProjectResponse : BaseModel
 {
     public string Name { get; set; }

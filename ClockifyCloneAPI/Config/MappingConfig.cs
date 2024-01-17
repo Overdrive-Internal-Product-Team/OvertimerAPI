@@ -26,6 +26,7 @@ namespace PersonalizeFIT.ExerciseAPI.Config
 
                 config.CreateMap<PostTagRequest, Tag>().ReverseMap();
                 config.CreateMap<GetAllTagResponse, Tag>().ReverseMap();
+                config.CreateMap<GetTagResponse, Tag>().ReverseMap();
                 config.CreateMap<UpdateTagRequest, Tag>()
                     .ForAllMembers(opt =>
                         opt.Condition((src, dest, srcMember, destMember) =>

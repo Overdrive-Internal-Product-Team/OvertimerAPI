@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using ClockifyCloneAPI.Database;
 using ClockifyCloneAPI.Entities;
 using ClockifyCloneAPI.Exceptions;
+using ClockifyCloneAPI.Models.Project;
 using ClockifyCloneAPI.Models.Tag;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,6 +49,16 @@ public class TagService : ITagService
         return tags;
     }
 
+    public async Task<GetTagResponse> Get(int id)
+    {
+        var project = await _context.Tags
+            .ProjectTo<GetTagResponse>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(p => p.Id == id)
+            ?? throw new NotFoundException("Tag não encontrada!");
+
+        return project;
+    }
+
     public async Task<string> Update(int id, UpdateTagRequest request)
     {
         var tag = await _context.Tags
@@ -68,6 +79,7 @@ public interface ITagService
     public Task<string> Create(PostTagRequest request);
     public Task<string> Delete(int id);
     public Task<List<GetAllTagResponse>> GetAll();
+    Task<GetProjectResponse> Get(int id);
 }
 
 
