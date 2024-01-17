@@ -84,4 +84,23 @@ public class TagController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetTag(int id)
+    {
+        try
+        {
+            var tag = await _tagService.Get(id);
+            return Ok(tag);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
+
