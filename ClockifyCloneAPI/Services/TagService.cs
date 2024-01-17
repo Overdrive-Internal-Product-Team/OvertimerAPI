@@ -39,6 +39,16 @@ public class TagService : ITagService
         return "Tag deletada com sucesso!";
     }
 
+    public async Task<GetTagResponse> Get(int id)
+    {
+        var tag = await _context.Tags
+             .ProjectTo<GetTagResponse>(_mapper.ConfigurationProvider)
+             .FirstOrDefaultAsync(p => p.Id == id)
+             ?? throw new NotFoundException("Tag não encontrada!");
+
+        return tag;
+    }
+
     public async Task<List<GetAllTagResponse>> GetAll()
     {
         var tags = await _context.Tags
@@ -49,15 +59,6 @@ public class TagService : ITagService
         return tags;
     }
 
-    public async Task<GetTagResponse> Get(int id)
-    {
-        var project = await _context.Tags
-            .ProjectTo<GetTagResponse>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(p => p.Id == id)
-            ?? throw new NotFoundException("Tag não encontrada!");
-
-        return project;
-    }
 
     public async Task<string> Update(int id, UpdateTagRequest request)
     {
@@ -79,7 +80,7 @@ public interface ITagService
     public Task<string> Create(PostTagRequest request);
     public Task<string> Delete(int id);
     public Task<List<GetAllTagResponse>> GetAll();
-    Task<GetProjectResponse> Get(int id);
+    public Task<GetTagResponse> Get(int id);
 }
 
 
