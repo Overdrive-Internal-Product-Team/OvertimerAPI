@@ -43,14 +43,13 @@ public class AuthService : IAuthService
         var user = GetValidUser(email, password);
         if (user is not null)
         {
-            Console.WriteLine(user.Role.Name);
-
             return new ClaimsPrincipal(
                 new ClaimsIdentity(
                     new[] {
                         new Claim(ClaimTypes.Email, user.Email),
                         new Claim(ClaimTypes.Name, user.Name),
-                        new Claim(ClaimTypes.Role, user.Role.Name)
+                        new Claim(ClaimTypes.Role, user.Role.Name),
+                        new Claim("Id", user.Id.ToString())
                     },
                     BearerTokenDefaults.AuthenticationScheme
                 )

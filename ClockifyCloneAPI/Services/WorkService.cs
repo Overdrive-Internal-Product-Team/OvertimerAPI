@@ -4,7 +4,9 @@ using ClockifyCloneAPI.Database;
 using ClockifyCloneAPI.Entities;
 using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.Work;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace ClockifyCloneAPI.Services
 {
@@ -59,10 +61,16 @@ namespace ClockifyCloneAPI.Services
             return work;
         }
 
-        public async Task<List<GetAllWorkResponse>> GetAll()
+        public async Task<List<GetAllWorkResponse>> GetAll(ClaimsPrincipal user)
         {
+            String? userIdClaim = user.FindFirst("Id")?.Value 
+                ?? throw new Exception("Claim inválida ou vazia!");
+
+            int userId = Convert.ToInt32(userIdClaim);
+
             var works = await _context.Works
                 .AsNoTracking()
+                .Where(u => u.Id == userId)
                 .ProjectTo<GetAllWorkResponse>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -103,7 +111,7 @@ namespace ClockifyCloneAPI.Services
         Task<string> Update(int id, UpdateWorkRequest request);
         Task<string> Create(PostWorkRequest request);
         Task<string> Delete(int id);
-        Task<List<GetAllWorkResponse>> GetAll();
+        Task<List<GetAllWorkResponse>> GetAll(ClaimsPrincipal user);
         Task<GetWorkResponse> Get(int id);
     }
 }

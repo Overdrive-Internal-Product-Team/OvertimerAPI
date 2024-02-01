@@ -3,9 +3,6 @@ using ClockifyCloneAPI.Models.Work;
 using ClockifyCloneAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ClockifyCloneAPI.Controllers;
 [Route("api/[controller]")]
@@ -25,7 +22,7 @@ public class WorkController : ControllerBase
     {
         try
         {
-            var works = await _workService.GetAll();
+            var works = await _workService.GetAll(User);
             return Ok(works);
         }
         catch (Exception ex)
