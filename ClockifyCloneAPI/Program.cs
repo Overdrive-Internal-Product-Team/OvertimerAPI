@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
-using PersonalizeFIT.ExerciseAPI.Config;
 using ClockifyCloneAPI.Database;
 using ClockifyCloneAPI.Services;
+using ClockifyCloneAPI.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +44,11 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddAuthentication().AddBearerToken();
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
+});
 
 builder.Services.AddDbContext<ClockifyCloneDbContext>(options =>
     options.UseNpgsql(builder.Configuration["AppSettings:DB_CONN"],

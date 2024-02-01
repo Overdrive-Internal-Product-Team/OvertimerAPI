@@ -10,6 +10,7 @@ using ClockifyCloneAPI.Entities;
 using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Services;
 using ClockifyCloneAPI.Models.Company;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClockifyCloneAPI.Controllers
 {
@@ -27,6 +28,7 @@ namespace ClockifyCloneAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
             try
@@ -41,6 +43,7 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/Company/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
             try
@@ -61,6 +64,7 @@ namespace ClockifyCloneAPI.Controllers
         // PUT: api/Company/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPatch("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> UpdateCompany(int id, UpdateCompanyRequest request)
         {
             try

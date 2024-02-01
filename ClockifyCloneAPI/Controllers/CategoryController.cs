@@ -1,6 +1,7 @@
 ﻿using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.Category;
 using ClockifyCloneAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClockifyCloneAPI.Controllers;
@@ -17,6 +18,7 @@ public class CategoryController : ControllerBase
 
     // GET: api/Category
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<GetAllCategoryResponse>>> GetCategories()
     {
         try
@@ -32,6 +34,7 @@ public class CategoryController : ControllerBase
 
     // GET: api/Category/5
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<GetCategoryResponse>> GetCategory(int id)
     {
         try
@@ -52,6 +55,7 @@ public class CategoryController : ControllerBase
     // PUT: api/Category/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPatch("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> PutCategory(int id, UpdateCategoryRequest request)
     {
         try
@@ -72,6 +76,7 @@ public class CategoryController : ControllerBase
     // POST: api/Category
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<ActionResult<string>> PostCategory(PostCategoryRequest request)
     {
         try
@@ -87,6 +92,7 @@ public class CategoryController : ControllerBase
 
     // DELETE: api/Category/5
     [HttpDelete("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> DeleteCategory(int id)
     {
         try

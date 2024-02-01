@@ -1,7 +1,7 @@
-﻿using ClockifyCloneAPI.Services;
+﻿using ClockifyCloneAPI.Models.Auth;
+using ClockifyCloneAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace ClockifyCloneAPI.Controllers;
 [Route("api/[controller]")]
@@ -13,12 +13,14 @@ public class AuthController : ControllerBase
     {
         _authService = authService;
     }
-    [HttpGet("login")]
-    public IActionResult Login(string email, string password)
+
+    [HttpPost("login")]
+    public IActionResult Login(PostLoginRequest request)
     {
+        Console.WriteLine("Entrou");
         try
         {
-            var claimsPrincipal = _authService.GetEmailClaimsPrincipal(email, password);
+            var claimsPrincipal = _authService.GetEmailClaimsPrincipal(request.Email, request.Password);
             return SignIn(claimsPrincipal);
         }
         catch (UnauthorizedAccessException)

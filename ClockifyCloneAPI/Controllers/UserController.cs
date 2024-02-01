@@ -3,6 +3,7 @@ using ClockifyCloneAPI.Entities;
 using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.User;
 using ClockifyCloneAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,19 +15,20 @@ namespace ClockifyCloneAPI.Controllers
     {
         private IUserService _userService;
 
-        public UserController(ClockifyCloneDbContext context, IUserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
         // GET: api/User
         [HttpGet]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             try
             {
-                var companies = await _userService.GetAll();
-                return Ok(companies);
+                var users = await _userService.GetAll();
+                return Ok(users);
             }
             catch (Exception ex)
             {
@@ -36,12 +38,13 @@ namespace ClockifyCloneAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             try
             {
-                var company = await _userService.Get(id);
-                return Ok(company);
+                var user = await _userService.Get(id);
+                return Ok(user);
             }
             catch (NotFoundException ex)
             {
@@ -56,6 +59,7 @@ namespace ClockifyCloneAPI.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPatch("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> UpdateUser(int id, UpdateUserRequest request)
         {
             try
@@ -76,6 +80,7 @@ namespace ClockifyCloneAPI.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult> PostUser(PostUserRequest request)
         {
             try

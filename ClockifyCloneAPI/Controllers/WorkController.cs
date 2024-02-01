@@ -1,6 +1,7 @@
 ﻿using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.Work;
 using ClockifyCloneAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ public class WorkController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<ActionResult<IEnumerable<GetAllWorkResponse>>> GetWorks()
     {
         try
@@ -33,6 +35,7 @@ public class WorkController : ControllerBase
     }
 
     [HttpPatch("{id}")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> PutWork(int id, UpdateWorkRequest request)
     {
         try
@@ -51,6 +54,7 @@ public class WorkController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<ActionResult<string>> PostWork(PostWorkRequest request)
     {
         try
@@ -65,6 +69,7 @@ public class WorkController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> DeleteWork(int id)
     {
         try
@@ -83,6 +88,7 @@ public class WorkController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetWork(int id)
     {
         try

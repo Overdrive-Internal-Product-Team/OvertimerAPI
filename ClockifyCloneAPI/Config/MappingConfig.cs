@@ -7,7 +7,7 @@ using ClockifyCloneAPI.Models.Tag;
 using ClockifyCloneAPI.Models.User;
 using ClockifyCloneAPI.Models.Work;
 
-namespace PersonalizeFIT.ExerciseAPI.Config
+namespace ClockifyCloneAPI.Config
 {
     public class MappingConfig
     {

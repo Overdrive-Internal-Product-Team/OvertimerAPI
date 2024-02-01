@@ -1,6 +1,7 @@
 ﻿using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.Project;
 using ClockifyCloneAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClockifyCloneAPI.Controllers;
@@ -16,6 +17,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<GetAllProjectResponse>>> GetProjects()
     {
         try
@@ -30,6 +32,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpPatch("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> PatchProject(int id, UpdateProjectRequest request)
     {
         try
@@ -48,6 +51,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<ActionResult<string>> PostProject(PostProjectRequest request)
     {
         try
@@ -62,6 +66,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> DeleteProject(int id)
     {
         try
@@ -80,6 +85,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetProject(int id)
     {
         try

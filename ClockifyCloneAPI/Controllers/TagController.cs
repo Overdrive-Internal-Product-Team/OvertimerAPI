@@ -1,6 +1,7 @@
 ﻿using ClockifyCloneAPI.Exceptions;
 using ClockifyCloneAPI.Models.Tag;
 using ClockifyCloneAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClockifyCloneAPI.Controllers;
@@ -17,6 +18,7 @@ public class TagController : ControllerBase
 
     // GET: api/Tag
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<GetAllTagResponse>>> GetTags()
     {
         try
@@ -28,11 +30,12 @@ public class TagController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
-    }   
+    }
 
     // PUT: api/Tag/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPatch("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> PutTag(int id, UpdateTagRequest request)
     {
         try
@@ -53,6 +56,7 @@ public class TagController : ControllerBase
     // POST: api/Tag
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<ActionResult<string>> PostTag(PostTagRequest request)
     {
         try
@@ -68,6 +72,7 @@ public class TagController : ControllerBase
 
     // DELETE: api/Tag/5
     [HttpDelete("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> DeleteTag(int id)
     {
         try
@@ -86,6 +91,7 @@ public class TagController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetTag(int id)
     {
         try
