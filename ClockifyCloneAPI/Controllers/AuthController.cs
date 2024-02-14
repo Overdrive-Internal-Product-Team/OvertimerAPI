@@ -31,7 +31,21 @@ public class AuthController : ControllerBase
             return BadRequest(ex.Message);
         }      
     }
-  
+
+    [HttpGet("verify-token")]
+    [Authorize]
+    public async Task<IActionResult> VerifyToken()
+    {
+        try
+        {
+            return Ok("Token Válido");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
 
     [HttpGet("user")]
     [Authorize]

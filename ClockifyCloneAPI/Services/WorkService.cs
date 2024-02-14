@@ -70,7 +70,7 @@ namespace ClockifyCloneAPI.Services
 
             var works = await _context.Works
                 .AsNoTracking()
-                .Where(u => u.Id == userId)
+                .Where(u => u.UserId == userId)
                 .ProjectTo<GetAllWorkResponse>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
